@@ -47,6 +47,10 @@ table {
     order: 1;
 }
 
+.logo-header {
+    width: 15%;
+}
+
 .menu {
     order: 2;
     display: flex;
@@ -89,7 +93,7 @@ table {
 /* Media Queries */
 @media(min-width: 480px) {
     .menu-container {
-        padding: 0.3125rem 5rem 0.3125rem 5rem;
+        padding: 0.3125rem 4rem 0.3125rem 4rem;
     }
 }
 
@@ -98,6 +102,7 @@ table {
         order: 3;
         padding-left: 0.625rem;
         border-left: 0.0625rem solid #efefefff;
+        margin-bottom: 0.5rem;
     }
 
     .logo-container {
@@ -216,3 +221,109 @@ table {
     width: 5%;
 }
 
+/* footer */
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    color: #9a9a9a;
+    background-color: white;
+}
+
+.logo-footer {
+    width: 25%;
+}
+
+footer .sub-title {
+    color: #535353;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+footer .content-wrapper {
+    flex-grow: 1;
+    align-items: center;
+}
+
+footer .content-wrapper .left-content,
+footer .content-wrapper .right-content {
+    text-align: left;
+    padding: 0.625rem;
+}
+
+footer .content-wrapper .left-content p {
+    font-size: 0.8rem;
+    padding-top: 1.2rem;
+}
+
+footer .content-wrapper .right-content article {
+    margin: 0.625rem 0;
+}
+
+footer .content-wrapper .right-content p {
+    font-weight: bold;
+}
+
+footer > p {
+    flex-grow: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 0.625rem;
+    background-color: #efefef;
+}
+
+
+.social-icons {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.icons {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #9a9a9a;
+}
+
+.icons-social {
+    margin: 0.5rem;
+}
+
+@media(min-width: 960px) {
+    footer .content-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        padding: 1.3rem 3.5rem 0.3rem 3.5rem;
+    }
+
+    footer .content-wrapper .left-content {
+        max-width: 20rem;
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    footer .content-wrapper .right-content {
+        display: flex;
+        flex-grow: 0;
+    }
+
+    footer .content-wrapper .right-content article {
+        margin: 0.652rem;
+    }
+
+    footer .footer-copyright {
+        width: 100%;
+        background-color: #efefef;
+        padding: 0.625rem;
+        color: #9a9a9a;
+    }
+
+    footer .footer-copyright p {
+        margin-bottom: 0 !important;
+        padding-left: 3.2rem;
+    }
+}
