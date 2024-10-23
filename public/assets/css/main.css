@@ -1,0 +1,145 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-size: 100%;
+    line-height: 1.5;
+}
+
+body {
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* header site */
+
+.menu-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    padding-bottom: 0.3125rem;
+}
+
+.menu-container .logo-container {
+    order: 1;
+}
+
+.menu {
+    order: 2;
+    display: flex;
+    list-style: none;
+}
+
+.menu li {
+    display: inline-flex;
+    align-items: center;
+}
+
+.menu .profile {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border: 3px solid #9a9a9aff;
+    border-radius: 50%;
+    margin-right: 0.3125rem;
+}
+
+.menu .profile img {
+    margin: 0.4rem;
+}
+
+.menu .welcome_user {
+    display: inline-flex;
+    flex-direction: column;
+    margin-right: 0.3125rem;
+}
+
+.menu .welcome {
+    font-size: 0.8rem;
+    color: #9a9a9aff;
+}
+
+.menu .user {
+    color: #000000;
+}
+
+.menu .drop-down {
+    border-color: white !important;
+}
+
+/* Media Queries */
+@media(min-width: 480px) {
+    .menu-container {
+        padding: 0.3125rem 5rem 0.3125rem 5rem;
+    }
+}
+
+@media(min-width: 640px) {
+    .menu {
+        order: 3;
+        padding-left: 0.625rem;
+        border-left: 0.0625rem solid #efefefff;
+    }
+
+    .logo-container {
+        flex-grow: 1;
+    }
+}
+
+/* search input */
+
+.search-form {
+    order: 3;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom: 0.3125rem;
+}
+
+.search-form input[type="text"] {
+    border-radius: 2.25rem 0 0 2.25rem;
+    border: none;
+    background-color: #efefefff;
+    min-width: 10rem; /* 250px */
+    border-right: 0.0625rem;
+    padding: 0.625rem;
+}
+
+.search-form button {
+    border-radius: 0 2.25rem 2.25rem 0;
+    border: none;
+    padding: 0.625rem;
+}
+
+@media(min-width: 640px) {
+    .search-form {
+        order: 2;
+        width: auto;
+        padding-right: 0.625rem;
+    }
+}
