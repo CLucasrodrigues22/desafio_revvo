@@ -1,0 +1,17 @@
+{
+    "name": "desafio_revvo/desafio_revvo",
+    "description": "Desafio revvo",
+
+    "license": "MIT",
+
+    "require": {
+        "php": "^8.3",
+        "vlucas/phpdotenv": "^5.6"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
