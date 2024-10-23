@@ -67,10 +67,6 @@ table {
     margin-right: 0.3125rem;
 }
 
-.menu .profile img {
-    margin: 0.4rem;
-}
-
 .menu .welcome_user {
     display: inline-flex;
     flex-direction: column;
