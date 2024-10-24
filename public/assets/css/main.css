@@ -249,6 +249,7 @@ table {
 .card-course {
     width: 18rem;
     margin-bottom: 10%;
+    border-radius: inherit;
 }
 
 .card-body .card-title {
@@ -274,6 +275,8 @@ table {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    border-radius: inherit;
+    border-style: dashed;
 }
 
 .add-course a {

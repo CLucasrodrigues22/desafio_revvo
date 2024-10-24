@@ -15,6 +15,30 @@ class Route extends Init
             'action' => 'index'
         );
 
+        $routes['getcourse'] = array (
+            'route' => '/getcourse',
+            'controller' => 'HomeController',
+            'action' => 'getCourse'
+        );
+
+        $routes['storecourse'] = array (
+            'route' => '/storecourse',
+            'controller' => 'HomeController',
+            'action' => 'store'
+        );
+
+        $routes['updatecourse'] = array (
+            'route' => '/updatecourse',
+            'controller' => 'HomeController',
+            'action' => 'update'
+        );
+
+        $routes['deletecourse'] = array (
+            'route' => '/deletecourse',
+            'controller' => 'HomeController',
+            'action' => 'delete'
+        );
+
         $this->setRoutes($routes);
     }
 }

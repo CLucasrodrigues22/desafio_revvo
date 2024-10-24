@@ -104,7 +104,7 @@
 
         <div class="col-sm-6 col-lg-3 course">
             <div class="card add-course">
-                <a href=#>
+                <a data-bs-toggle="modal" data-bs-target="#managementCourse">
                     <img src="assets/img/add_course.svg" class="card-img-top" alt="icone para adicionar curso">
                     <span>ADICIONAR</span>
                     <h5>CURSO</h5>
@@ -115,5 +115,37 @@
     </div>
 </div>
 <!-- end coursers -->
+
+<!-- Modal -->
+<div class="modal fade" id="managementCourse" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="managementCourseLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="managementCourseLabel">Adicionar Curso</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/storecourse" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="tituloInput" class="form-label">Titulo do Curso</label>
+                        <input type="text" class="form-control" id="tituloInput" placeholder="Digite o titulo do curso" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricaoInput" class="form-label">Descrição do Curso</label>
+                        <textarea class="form-control" id="descricaoInput" rows="3" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bannerFile" class="form-label">Banner do curso</label>
+                        <input class="form-control" type="file" id="bannerFile" name="banner">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
