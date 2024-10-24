@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('managementCourse');
-    const form = modal.querySelector('form');
+    const form = modal.querySelector('#courseForm');
+    const modalTitle = modal.querySelector('#managementCourseLabel');
 
     modal.addEventListener('show.bs.modal', function (e) {
         const button = e.relatedTarget;
@@ -10,16 +11,25 @@ document.addEventListener('DOMContentLoaded', function () {
         const description = button.getAttribute('data-description');
         const bannerName = button.getAttribute('data-banner');
 
-        form.querySelector('#courseId').value = id;
-        form.querySelector('#tituloInput').value = title;
-        form.querySelector('#descricaoInput').value = description;
+        if (id) {
+            modalTitle.textContent = 'Detalhes do Curso';
+            form.querySelector('#courseId').value = id;
+            form.querySelector('#tituloInput').value = title;
+            form.querySelector('#descricaoInput').value = description;
 
-        const bannerImg = modal.querySelector('.modal-img-top');
-        if (bannerName) {
+            const bannerImg = modal.querySelector('.modal-img-top');
             bannerImg.src = `storage/banner-course/${bannerName}`;
-            bannerImg.style.display = 'block'; // Exibe a imagem
+            bannerImg.style.display = 'block';
+
+            form.action = `/updatecourse`; // Altera a ação para atualização com o ID
+            form.setAttribute('data-action', 'edit'); // Define data-action como edit
         } else {
-            bannerImg.style.display = 'none'; // Oculta a imagem se não houver
+            modalTitle.textContent = 'Adicionar Curso';
+            form.reset();
+            modal.querySelector('.modal-img-top').style.display = 'none';
+
+            form.action = '/storecourse'; // Altera a ação para criação
+            form.setAttribute('data-action', 'create'); // Define data-action como create
         }
     });
 });

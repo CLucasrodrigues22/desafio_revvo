@@ -2,6 +2,8 @@
 
 namespace App\Helper;
 
+use Throwable;
+
 class StorageHelper
 {
     public function storage($data, $dir): string|array
@@ -26,5 +28,11 @@ class StorageHelper
                 ];
             }
         }
+    }
+
+    public function deleteFile(string $data, string $dir): void
+    {
+        $urlFile = $dir . $data;
+        unlink($urlFile);
     }
 }

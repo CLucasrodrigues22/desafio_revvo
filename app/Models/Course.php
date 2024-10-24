@@ -47,4 +47,21 @@ class Course extends Model
             echo $e->getMessage();
         }
     }
+
+    public function update(int $id): bool|array
+    {
+        try {
+            $query = "update courses set title = :title, description = :description, banner = :banner where id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->bindValue(':title', $this->__get('title'));
+            $stmt->bindValue(':description', $this->__get('description'));
+            $stmt->bindValue(':banner', $this->__get('banner'));
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

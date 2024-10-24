@@ -414,3 +414,10 @@ footer > p {
         padding-left: 3.2rem;
     }
 }
+
+/* modal curso */
+
+.modal-img-top {
+    display: block;
+    padding: 1rem 6rem 1rem 5rem;
+}

@@ -68,4 +68,32 @@ class HomeController extends Action
             header("Location: /?feedback=$status");
         }
     }
+
+    public function update(): void
+    {
+        $data = $_POST;
+        $banner = $_FILES['banner'];
+        $storageHelper = new StorageHelper();
+        $course = Container::getModel('Course');
+        $courseData = Container::getModel('Course')->getById($data['course_id']);
+        $dirBanner = 'storage/banner-course/';
+
+        // verificar se tem uma nova imagem
+        if($banner['size'] != 0)
+        {
+            // localizar imagem atual
+            $storageHelper->deleteFile($courseData['banner'], $dirBanner);
+            $newBanner = $storageHelper->storage($banner, $dirBanner);
+            $courseData['banner'] = $newBanner;
+        }
+
+        $course->__set('title', $_POST['title']);
+        $course->__set('description', $_POST['description']);
+        $course->__set('banner', $courseData['banner']);
+        $course->update($data['course_id']);
+
+        $status = 'success';
+        header("Location: /?feedback=$status");
+        exit;
+    }
 }
