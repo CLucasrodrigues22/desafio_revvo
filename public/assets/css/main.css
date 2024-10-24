@@ -260,6 +260,15 @@ table {
     color: #9a9a9a;
 }
 
+.card-text {
+    height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .card-body a {
     background-color: #18b427;
     color: white;
