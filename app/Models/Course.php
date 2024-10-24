@@ -19,6 +19,18 @@ class Course extends Model
         return $this->db->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getById(int $id): ?array
+    {
+        $query = "SELECT * FROM courses WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
+
+
     // salvar
     public function store(): bool|array
     {

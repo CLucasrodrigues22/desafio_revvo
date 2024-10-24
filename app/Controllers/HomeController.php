@@ -20,6 +20,28 @@ class HomeController extends Action
         }
     }
 
+    public function getCourse()
+    {
+        try {
+            $id = $_GET['id'];
+            header('Content-Type: application/json');
+
+            $course = Container::getModel('Course');
+            $courseData = $course->getById($id);
+
+            $data = [
+                'id' => $id,
+                'title' => $courseData['title'],
+                'description' => $courseData['description'],
+                'banner' => $courseData['banner'],
+            ];
+
+            echo json_encode($data);
+        } catch (Throwable $e) {
+            echo json_encode(['error' => 'Course not found']);
+        }
+    }
+
     public function store(): void
     {
         try {
