@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Container;
 use App\Helper\StorageHelper;
+use JetBrains\PhpStorm\NoReturn;
 use Throwable;
 
 class HomeController extends Action
@@ -92,6 +93,21 @@ class HomeController extends Action
         $course->__set('banner', $courseData['banner']);
         $course->update($data['course_id']);
 
+        $status = 'success';
+        header("Location: /?feedback=$status");
+        exit;
+    }
+
+    public function destroy(): void
+    {
+        $id = $_GET['id'];
+        $storageHelper = new StorageHelper();
+        $course = Container::getModel('Course');
+        $dirBanner = 'storage/banner-course/';
+        $courseData = Container::getModel('Course')->getById($id);
+        $storageHelper->deleteFile($courseData['banner'], $dirBanner);
+        $course->__set('id', $id);
+        $course->destroy();
         $status = 'success';
         header("Location: /?feedback=$status");
         exit;

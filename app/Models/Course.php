@@ -64,4 +64,16 @@ class Course extends Model
             echo $e->getMessage();
         }
     }
+
+    public function destroy()
+    {
+        try {
+            $query = "DELETE FROM courses WHERE id = :id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

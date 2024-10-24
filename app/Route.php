@@ -36,7 +36,7 @@ class Route extends Init
         $routes['deletecourse'] = array (
             'route' => '/deletecourse',
             'controller' => 'HomeController',
-            'action' => 'delete'
+            'action' => 'destroy'
         );
 
         $this->setRoutes($routes);
