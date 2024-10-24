@@ -148,7 +148,7 @@ table {
 /* slide */
 
 .img-slide {
-    height: 40rem !important;
+    height: 30rem !important;
 }
 
 .carousel-caption {
@@ -157,7 +157,7 @@ table {
     position: absolute !important;
     right: 60% !important;
     left: 5% !important;
-    bottom: 10rem !important;
+    bottom: 6rem !important;
     padding: 1rem !important;
     box-sizing: border-box !important;
 }
@@ -219,6 +219,81 @@ table {
 
 .carousel-control-next {
     width: 5%;
+}
+
+/* card courses */
+
+.all-courses {
+    padding: 3.3rem 3.5rem 0.3rem 3.5rem;
+    display: grid;
+    background-color: #efefef;
+}
+
+.title-courses {
+    border-bottom: 1px solid #9a9a9a;
+}
+
+.title-courses h3 {
+    font-weight: bold;
+    color: #777575;
+}
+
+.courses-list {
+    padding-top: 2%;
+}
+
+.course {
+    display: flex;
+}
+
+.card-course {
+    width: 18rem;
+    margin-bottom: 10%;
+}
+
+.card-body .card-title {
+    font-weight: bold;
+}
+
+.card-body .card-text {
+    color: #9a9a9a;
+}
+
+.card-body a {
+    background-color: #18b427;
+    color: white;
+    font-weight: bold;
+    border-radius: 2rem;
+    width: 15rem;
+}
+
+.add-course {
+    width: 18rem;
+    margin-bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.add-course a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.add-course img {
+    cursor: pointer;
+    width: 10rem;
+    padding-top: 4rem;
+    margin-bottom: 10px;
+}
+
+.add-course span, .add-course h5 {
+    font-weight: bold;
+    color: #9a9a9a;
 }
 
 /* footer */
