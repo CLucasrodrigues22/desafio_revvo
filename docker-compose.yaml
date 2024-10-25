@@ -31,7 +31,6 @@ services:
     volumes:
       - /var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
-      - ./docker/mysql:/docker-entrypoint-initdb.d
 
   # nginx
   httpserver:

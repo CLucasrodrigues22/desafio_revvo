@@ -1,5 +1,3 @@
-create database revvo_desafio;
-
 use revvo_desafio;
 
 create table users
