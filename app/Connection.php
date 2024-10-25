@@ -1,44 +1,26 @@
 <?php
-//
-//namespace App;
-//
-//class Connection {
-//
-//    public static function getDb() {
-//        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '../');
-//        $dotenv->load();
-//
-//        try {
-//            // use .env
-//            return new \PDO(
-//                sprintf(
-//                    "mysql:host=%s;dbname=%s;charset=utf8",
-//                    getenv('DB_HOST'),
-//                    getenv('DB_DATABASE')
-//                ),
-//                getenv('DB_USERNAME'),
-//                getenv('DB_PASSWORD')
-//            );
-//        } catch (\PDOException $e) {
-//            echo 'Erro: ' . $e->getMessage();
-//        }
-//    }
-//}
 
 namespace App;
+
+use PDO;
+use PDOException;
+use Dotenv\Dotenv;
 
 class Connection
 {
     public static function getDb()
     {
+        // carrega as variáveis do .env
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+        $dotenv->load();
+
         try {
-            $conn = new \PDO(
-                "mysql:host=db;dbname=revvo_desafio;charset=utf8",
-                "root",
-                "password"
+            return new PDO(
+                "mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_DATABASE'] . ";charset=utf8",
+                $_ENV['DB_USERNAME'],
+                $_ENV['DB_PASSWORD']
             );
-            return $conn;
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             echo 'Erro na conexão com o banco: ' . $e->getMessage();
         }
     }
