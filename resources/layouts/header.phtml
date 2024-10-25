@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $showModalOffer = isset($_SESSION['first_access']) && $_SESSION['first_access'] === 1;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,7 +13,126 @@
 </head>
 <body>
     <div class="container">
-        <?= $this->content() ?>
+        <!-- init header -->
+        <header class="main-header">
+            <div class="menu-container content">
+                <div class="logo-container">
+                    <img class="logo-header" src="/assets/img/logo_header.svg" alt="logo">
+                </div>
+                <form action="#" class="search-form" >
+                    <input type="text" required name="search" placeholder="Pesquisar cursos...">
+                    <button type="submit"><img src="/assets/img/search.png" alt="search" width="32" height="32"></button>
+                </form>
+                <?php if(isset($_SESSION['id'])) { ?>
+                    <ul class="menu">
+                        <li>
+                            <img  class="profile" src="/storage/user-avatar/<?= $_SESSION['avatar'] ?>" alt="search" width="50" height="50">
+                            <span class="welcome_user">
+                                <span class="welcome">Seja bem-vindo</span>
+                                <span class="user"><?= $_SESSION['name'] ?></span>
+                            </span>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle drop-down" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#accountModal"
+                                           data-action="view"
+                                           data-id="<?= $_SESSION['id'] ?>"
+                                           data-name="<?= htmlspecialchars($_SESSION['name'], ENT_QUOTES) ?>"
+                                           data-email="<?= htmlspecialchars($_SESSION['email'], ENT_QUOTES) ?>"
+                                           data-avatar="<?= $_SESSION['avatar'] ?>"
+                                        >Meus Dados</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                <?php }
+                else { ?>
+                    <div class="menu">
+                        <a class="navbar-brand m-2" data-bs-toggle="modal" data-bs-target="#accountModal" data-action="login">Entrar</a>
+                        <a class="navbar-brand m-2" data-bs-toggle="modal" data-bs-target="#accountModal" data-action="newaccount">Cadastra-se</a>
+                    </div>
+                <?php } ?>
+            </div>
+        </header>
+        <!-- end header -->
+
+        <!-- init slide -->
+        <div id="carouselExampleCaptions" class="carousel slide slideshow">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/assets/img/slide.png" class="d-block w-100 img-slide" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="content-caption">
+                            <h3>LOREM IPSUM 1</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing
+                                and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <a href="#"><span>VER CURSO</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/assets/img/slide.png" class="d-block w-100 img-slide" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="content-caption">
+                            <h3>LOREM IPSUM 2</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing
+                                and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <a href="#"><span>VER CURSO</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/assets/img/slide.png" class="d-block w-100 img-slide" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="content-caption">
+                            <h3>LOREM IPSUM 3</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing
+                                and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            <a href="#"><span>VER CURSO</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- end slide -->
+
+
+        <!-- content -->
+        <?php
+            if(isset($_SESSION['id'])) {
+                $this->content();
+            } else { ?>
+
+            <div class="no-session" style="
+    margin: 15.7rem;
+    text-align: center;
+">
+                <h3>Nehuma sessão iniciada</h3>
+                <p>Para vizualizar os cursos, por favor, inicie a sessão com um usuário valido ou cadastre-se.</p>
+            </div>
+
+        <?php } ?>
+        <!-- end content-->
+
+        <!-- footer-->
         <footer class="footer">
             <div class="content-wrapper content">
                 <div class="left-content">
@@ -42,9 +162,117 @@
                 <p>Copyright 2024 - All right reserved.</p>
             </div>
         </footer>
+        <!-- end footer-->
     </div>
+    <!-- Modal management -->
+    <div class="modal fade" id="managementCourse" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="managementCourseLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="managementCourseLabel">Adicionar Curso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/storecourse" method="post" enctype="multipart/form-data" id="courseForm" data-action="create">
+                    <div class="modal-body">
+                        <input type="hidden" id="courseId" required name="course_id">
+                        <div class="mb-3">
+                            <label for="tituloInput" class="form-label">Titulo do Curso</label>
+                            <input type="text" class="form-control" id="tituloInput" placeholder="Digite o titulo do curso" required name="title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descricaoInput" class="form-label">Descrição do Curso</label>
+                            <textarea class="form-control" id="descricaoInput" rows="3" required name="description"></textarea>
+                        </div>
+                        <div class="mb-3" id="bannerField">
+                            <img src="" class="modal-img-top" id="bannerImg" style="display:none;" alt="curso-banner">
+                            <label for="bannerFile" class="form-label">Banner do curso</label>
+                            <input class="form-control" type="file" id="bannerFile" required name="banner">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="deleteCourseBtn" style="display: none;">Deletar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end Modal management -->
+
+    <!-- modal init banner -->
+    <div class="modal fade" id="bannerFirstModal" tabindex="-1" aria-labelledby="bannerFirstModalLabel" aria-hidden="false">
+        <div class="modal-dialog modal-lg" style="position: relative;">
+            <div class="modal-content">
+                <img src="/assets/img/modal.jpg" class="modal-init" alt="curso-banner" style="width: 100%; height: auto;" />
+                <div class="button-close-model" style="background-color: white; border-radius: 50%; position: fixed !important; left: 76%; bottom: 95%; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="margin: 2rem 8rem 2rem 7rem; text-align: center;">
+                    <h4 class="title-modal-init mb-3" style="font-weight: bold;">EGESTAS TORTOR VULPUTATE</h4>
+                    <p class="content-modal-init mb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                    <button type="button" class="btn btn-primary btn-modal-init">INSCREVER-SE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal init banner -->
+
+    <!-- modal account management -->
+    <div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Usuário</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/auth" method="post" enctype="multipart/form-data" id="authenticationForm" data-action="login">
+                    <div class="modal-body">
+                        <div class="mb-3" id="nameField">
+                            <label for="nameInput" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nameInput" placeholder="Digite seu nome" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailInput" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="emailInput" placeholder="Digite um e-mail válido" required name="email">
+                        </div>
+                        <div class="mb-3" id="passwordField">
+                            <label for="passwordInput" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="passwordInput" placeholder="Digite uma senha" required name="password">
+                        </div>
+                        <div class="alert alert-danger" role="alert" id="passwordAlert" style="display: none;">
+                            As senhas não conferem.
+                        </div>
+                        <div class="mb-3" id="passwordConfirmField">
+                            <label for="passwordConfirmInput" class="form-label">Confirmar senha</label>
+                            <input type="password" class="form-control" id="passwordConfirmInput" placeholder="Digite novamente a senha" name="password_confirmation">
+                        </div>
+                        <div class="mb-3" id="avatarField">
+                            <img src="" class="modal-img-top" id="avatarImg" style="display:none;" alt="avatar">
+                            <label for="avatarFile" class="form-label">Avatar</label>
+                            <input class="form-control" type="file" id="avatarFile" name="avatar">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="actionForm">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end modal account management -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verifica se o modal deve ser exibido
+            <?php if ($showModalOffer): ?>
+            let myModal = new bootstrap.Modal(document.getElementById('bannerFirstModal'));
+            myModal.show();
+            <?php endif; ?>
+        });
+    </script>
 </body>
 </html>

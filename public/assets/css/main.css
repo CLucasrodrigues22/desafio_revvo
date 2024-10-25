@@ -17,6 +17,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.content {
+    flex: 1;
+}
+
 input, button, textarea, select {
     font: inherit;
 }
@@ -60,6 +64,10 @@ table {
 .menu li {
     display: inline-flex;
     align-items: center;
+}
+
+.menu a {
+    cursor: pointer;
 }
 
 .menu .profile {
@@ -421,3 +429,5 @@ footer > p {
     display: block;
     padding: 1rem 6rem 1rem 5rem;
 }
+
+/*modal init access*/
