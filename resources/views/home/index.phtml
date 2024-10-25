@@ -5,26 +5,40 @@
             <img class="logo-header" src="/assets/img/logo_header.svg" alt="logo">
         </div>
         <form action="#" class="search-form" >
-            <input type="text" name="search" placeholder="Pesquisar cursos...">
+            <input type="text" required name="search" placeholder="Pesquisar cursos...">
             <button type="submit"><img src="/assets/img/search.png" alt="search" width="32" height="32"></button>
         </form>
-        <ul class="menu">
-            <li>
-                <img  class="profile" src="/assets/img/user.png" alt="search" width="50" height="50">
-                <span class="welcome_user">
-                <span class="welcome">Seja bem-vindo</span>
-                <span class="user">Lucas Rodrigues</span>
-            </span>
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle drop-down" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Meus Dados</a></li>
-                        <li><a class="dropdown-item" href="#">Sair</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
+        <?php if(isset($_SESSION['id'])) { ?>
+            <ul class="menu">
+                <li>
+                    <img  class="profile" src="/storage/user-avatar/<?= $_SESSION['avatar'] ?>" alt="search" width="50" height="50">
+                    <span class="welcome_user">
+                    <span class="welcome">Seja bem-vindo</span>
+                    <span class="user"><?= $_SESSION['name'] ?></span>
+                </span>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle drop-down" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#accountModal"
+                                   data-action="view"
+                                   data-id="<?= $_SESSION['id'] ?>"
+                                   data-name="<?= htmlspecialchars($_SESSION['name'], ENT_QUOTES) ?>"
+                                   data-email="<?= htmlspecialchars($_SESSION['email'], ENT_QUOTES) ?>"
+                                   data-avatar="<?= $_SESSION['avatar'] ?>"
+                                >Meus Dados</a></li>
+                            <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        <?php }
+            else { ?>
+            <div class="menu">
+                <a class="navbar-brand m-1" data-bs-toggle="modal" data-bs-target="#accountModal" data-action="login">Login</a>
+                <a class="navbar-brand m-1" data-bs-toggle="modal" data-bs-target="#accountModal" data-action="newaccount">Criar Conta</a>
+            </div>
+        <?php } ?>
     </div>
 </header>
 <!-- end header -->
@@ -123,7 +137,7 @@
 </div>
 <!-- end coursers -->
 
-<!-- Modal -->
+<!-- Modal management -->
 <div class="modal fade" id="managementCourse" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="managementCourseLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -133,19 +147,19 @@
             </div>
             <form action="/storecourse" method="post" enctype="multipart/form-data" id="courseForm" data-action="create">
                 <div class="modal-body">
-                    <input type="hidden" id="courseId" name="course_id">
+                    <input type="hidden" id="courseId" required name="course_id">
                     <div class="mb-3">
                         <label for="tituloInput" class="form-label">Titulo do Curso</label>
-                        <input type="text" class="form-control" id="tituloInput" placeholder="Digite o titulo do curso" name="title">
+                        <input type="text" class="form-control" id="tituloInput" placeholder="Digite o titulo do curso" required name="title">
                     </div>
                     <div class="mb-3">
                         <label for="descricaoInput" class="form-label">Descrição do Curso</label>
-                        <textarea class="form-control" id="descricaoInput" rows="3" name="description"></textarea>
+                        <textarea class="form-control" id="descricaoInput" rows="3" required name="description"></textarea>
                     </div>
                     <div class="mb-3" id="bannerField">
                         <img src="" class="modal-img-top" id="bannerImg" style="display:none;" alt="curso-banner">
                         <label for="bannerFile" class="form-label">Banner do curso</label>
-                        <input class="form-control" type="file" id="bannerFile" name="banner">
+                        <input class="form-control" type="file" id="bannerFile" required name="banner">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -157,5 +171,69 @@
         </div>
     </div>
 </div>
+<!-- end Modal management -->
 
+<!-- modal init banner -->
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal init banner -->
 
+<!-- modal account management -->
+<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Usuário</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/auth" method="post" enctype="multipart/form-data" id="authenticationForm" data-action="login">
+                <div class="modal-body">
+                    <div class="mb-3" id="nameField">
+                        <label for="nameInput" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nameInput" placeholder="Digite seu nome" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="emailInput" placeholder="Digite um e-mail válido" required name="email">
+                    </div>
+                    <div class="mb-3" id="passwordField">
+                        <label for="passwordInput" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="passwordInput" placeholder="Digite uma senha" required name="password">
+                    </div>
+                    <div class="alert alert-danger" role="alert" id="passwordAlert" style="display: none;">
+                        As senhas não conferem.
+                    </div>
+                    <div class="mb-3" id="passwordConfirmField">
+                        <label for="passwordConfirmInput" class="form-label">Confirmar senha</label>
+                        <input type="password" class="form-control" id="passwordConfirmInput" placeholder="Digite novamente a senha" name="password_confirmation">
+                    </div>
+                    <div class="mb-3" id="avatarField">
+                        <img src="" class="modal-img-top" id="avatarImg" style="display:none;" alt="avatar">
+                        <label for="avatarFile" class="form-label">Avatar</label>
+                        <input class="form-control" type="file" id="avatarFile" name="avatar">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="actionForm">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end modal account management -->

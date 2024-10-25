@@ -9,31 +9,51 @@ class Route extends Init
     // função para iniciar rotas
     protected function initRoutes(): void
     {
-        $routes['home'] = array (
+        // rotas de autenticação
+        $routes['auth'] = array(
+            'route' => '/auth',
+            'controller' => 'UserController',
+            'action' => 'auth',
+        );
+
+        $routes['newaccount'] = array(
+            'route' => '/newaccount',
+            'controller' => 'UserController',
+            'action' => 'newaccount',
+        );
+
+        $routes['logout'] = array(
+            'route' => '/logout',
+            'controller' => 'UserController',
+            'action' => 'logout',
+        );
+
+        // rotas de cursos
+        $routes['home'] = array(
             'route' => '/',
             'controller' => 'HomeController',
             'action' => 'index'
         );
 
-        $routes['getcourse'] = array (
+        $routes['getcourse'] = array(
             'route' => '/getcourse',
             'controller' => 'HomeController',
             'action' => 'getCourse'
         );
 
-        $routes['storecourse'] = array (
+        $routes['storecourse'] = array(
             'route' => '/storecourse',
             'controller' => 'HomeController',
             'action' => 'store'
         );
 
-        $routes['updatecourse'] = array (
+        $routes['updatecourse'] = array(
             'route' => '/updatecourse',
             'controller' => 'HomeController',
             'action' => 'update'
         );
 
-        $routes['deletecourse'] = array (
+        $routes['deletecourse'] = array(
             'route' => '/deletecourse',
             'controller' => 'HomeController',
             'action' => 'destroy'
